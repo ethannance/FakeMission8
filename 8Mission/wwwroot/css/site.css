@@ -55,3 +55,7 @@ body {
     padding: 10px;
     text-align: center;
 }
+.quadrant {
+    border: 0.5px solid #000; /* Solid black border */
+    padding: 10px; /* Padding inside the box */
+}
