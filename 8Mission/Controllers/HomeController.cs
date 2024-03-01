@@ -8,11 +8,11 @@ namespace _8Mission.Controllers
 {
     public class HomeController : Controller
     {
-        private AddTaskContext _context;
+        private ITaskRepository _repo;
 
-        public HomeController(AddTaskContext temp) //Constructor
+        public HomeController(ITaskRepository temp) //Constructor
         {
-            _context = temp;
+            _repo = temp;
         }
         public IActionResult Index()
         {
@@ -22,12 +22,12 @@ namespace _8Mission.Controllers
         public IActionResult ViewTasks()
         {
 
-            ViewBag.Categories = _context.Categories
+            ViewBag.Categories = _repo.Categories
                 .OrderBy(x => x.CategoryName)
                 .ToList();
 
             //Linq
-            var applications = _context.AddTask.Include("Category")
+            var applications = _repo.AddTasks //Include("Category")
                 .Where(x => x.Completed == false)
                 .OrderBy(x => x.TaskId).ToList();
 
@@ -37,7 +37,7 @@ namespace _8Mission.Controllers
         [HttpGet]
         public IActionResult AddTask()
         {
-            ViewBag.Categories = _context.Categories
+            ViewBag.Categories = _repo.Categories
                 .OrderBy(x => x.CategoryId)
                 .ToList();
 
@@ -49,14 +49,13 @@ namespace _8Mission.Controllers
         {
             if (ModelState.IsValid)
             {
-                _context.AddTask.Add(response); // EF Core should handle TaskId
-                _context.SaveChanges();
+                _repo.AddTask(response);
 
                 return View("Confirmation", response);
             }
             else
             {
-                ViewBag.Categories = _context.Categories.OrderBy(x => x.CategoryName).ToList();
+                ViewBag.Categories = _repo.Categories.OrderBy(x => x.CategoryName).ToList();
                 return View(response);
             }
         }
@@ -65,10 +64,10 @@ namespace _8Mission.Controllers
         [HttpGet]
         public IActionResult Edit(int id) //Edits selected record
         {
-            var recordToEdit = _context.AddTask
-                .Single(x => x.TaskId == id);
+            var recordToEdit = _repo.GetTaskById(id);
+                
 
-            ViewBag.Categories = _context.Categories
+            ViewBag.Categories = _repo.Categories
                 .OrderBy(x => x.CategoryName)
                 .ToList();
 
@@ -80,14 +79,13 @@ namespace _8Mission.Controllers
         {
             if (ModelState.IsValid) // Check if the model state is valid
             {
-                _context.Update(updatedInfo);
-                _context.SaveChanges();
+                _repo.UpdateTask(updatedInfo);
 
                 return RedirectToAction("ViewTasks");
             }
             else // Model state is not valid, return to the view with the current information
             {
-                ViewBag.Categories = _context.Categories
+                ViewBag.Categories = _repo.Categories
                     .OrderBy(x => x.CategoryName)
                     .ToList();
 
@@ -98,8 +96,8 @@ namespace _8Mission.Controllers
         [HttpGet]
         public IActionResult Delete(int id) //Deletes selected record
         {
-            var recordToDelete = _context.AddTask
-                .Single(x => x.TaskId == id);
+            var recordToDelete = _repo.GetTaskById(id);
+                
 
             return View(recordToDelete);
         }
@@ -108,8 +106,8 @@ namespace _8Mission.Controllers
 
         public IActionResult Delete(AddTask application)
         {
-            _context.AddTask.Remove(application);
-            _context.SaveChanges();
+            _repo.DeleteTask(application);
+            
 
             return RedirectToAction("ViewTasks");
         }
