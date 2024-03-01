@@ -6,18 +6,17 @@
 @model AddTask
 
 <div class="container">
-    <form method="post"> 
+    <form method="post">
         <div class="row">
-            <div class="title col-12">Add a Task</div>
+            <div class="title col-12"><h1>Add a Task</h1></div>
         </div>
         <div class="row">
             <div class="col-12"><input asp-for="TaskId" hidden /></div>
-        </div> 
+        </div>
         <div class="row">
             <div class="col-6"><label asp-for="TaskName">Name of Task: </label></div>
             <div class="col-6"><input asp-for="TaskName" /></div>
         </div>
-
         <br />
         <div class="row">
             <div class="col-6"><label asp-for="DueDate">When is the task due?</label></div>
@@ -25,8 +24,17 @@
         </div>
         <br />
         <div class="row">
-            <div class="col-6"><label asp-for="Quadrant">In which Quadrant does this task belong?</label></div>
-            <div class="col-6"><input asp-for="Quadrant" /></div>
+            <div class="col-6"><label asp-for="Quadrant">How important/urgent is this task?</label></div>
+            <div class="col-6">
+                <select asp-for="Quadrant">
+                    <option value="">Choose Level of Importance</option>
+                    <option value="1">Important & Urgent</option>
+                    <option value="2">Important & Not Urgent</option>
+                    <option value="3">Not Important & Urgent</option>
+                    <option value="4">Not Important & Not Urgent</option>
+                </select>
+            </div>
+
         </div>
         <br />
         <div class="row">
@@ -53,8 +61,10 @@
             <br />
         </div>
         <div class="row">
-            <div class="col-12">
-                <button type="submit">Submit</button>
+            <div class="col-6">
+            </div>
+            <div class="col-6">
+                <button type="submit" class="btn btn-info">Submit</button>
                 <div asp-validation-summary="All"></div>
             </div>
         </div>
