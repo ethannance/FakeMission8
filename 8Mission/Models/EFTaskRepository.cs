@@ -18,10 +18,23 @@ namespace _8Mission.Models
             _context.AddTask.Add(task);
             _context.SaveChanges();
         }
-        public void UpdateTask(AddTask task)
+        public void UpdateTask(AddTask updatedTask)
         {
-            _context.Update(task);
-            _context.SaveChanges();
+            var existingTask = _context.AddTask.Find(updatedTask.TaskId);
+            if (existingTask != null)
+            {
+                // Update properties of existingTask with updatedTask
+                existingTask.TaskName = updatedTask.TaskName;
+                existingTask.DueDate = updatedTask.DueDate;
+                existingTask.Quadrant = updatedTask.Quadrant;
+                existingTask.CategoryId = updatedTask.CategoryId;
+                existingTask.Completed = updatedTask.Completed;
+
+                _context.SaveChanges();
+            }
+   
+            
+            
         }
         public void DeleteTask(AddTask task)
         {
