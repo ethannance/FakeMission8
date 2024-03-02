@@ -1,75 +1,86 @@
-@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
 @{
 }
 
 @model IEnumerable<_8Mission.Models.AddTask>
 
 
-<div class="container">
-    <div class="row col-12"><h1>Steven Covey's Time Management Matrix</h1></div>
-    <div class="row col-12">
-        <div class="col-4"></div>
-        <div class="col-4"><h2>Urgent</h2></div>
-        <div class="col-4"><h2>Not Urgent</h2></div>
+
+<div class="container mt-5">
+    <div class="row col-12 mb-4">
+        <h1 class="text-center display-4">Steven Covey's Time Management Matrix</h1>
     </div>
-    <div class="row col-12">
-        <div class="col-4"><h2>Important</h2></div>
-        <div class="col-4 quadrant">
-            <h3>Quadrant 1</h3>
+    <div class="row col-12 text-center mb-4">
+        <div class="col-4"></div>
+        <div class="col-4">
+            <h2 class="bg-secondary text-white p-2 rounded">Urgent</h2>
+        </div>
+        <div class="col-4">
+            <h2 class="bg-secondary text-white p-2 rounded">Not Urgent</h2>
+        </div>
+    </div>
+    <div class="row col-12 mb-4">
+        <div class="col-4 d-flex align-items-center justify-content-end">
+            <h2 class="bg-secondary text-white p-2 rounded">Important</h2>
+        </div>
+        <div class="col-4 quadrant bg-light border rounded p-3">
             @foreach (var x in Model.Where(x => x.Quadrant == 1))
             {
-                <p>- @x.TaskName  </p>
-                <p> Due: @x.DueDate </p>
-                <p> Category: @x.Category?.CategoryName </p>
-                <p>
-                    <a class="btn btn-info" asp-controller="Home" asp-action="Edit" asp-route-id="@x.TaskId">Edit</a>
-                    <a class="btn btn-danger" asp-controller="Home" asp-action="Delete" asp-route-id="@x.TaskId">Delete</a>
-                </p>
-                <br />
+                <div class="card mb-3 shadow-sm">
+                    <div class="card-body">
+                        <h5 class="card-title">@x.TaskName</h5>
+                        <h6 class="card-subtitle mb-2 text-muted">Category: @x.Category?.CategoryName</h6>
+                        <h6 class="card-subtitle mb-2 text-muted">Due: @x.DueDate</h6>
+                        <a class="btn btn-outline-info" asp-controller="Home" asp-action="Edit" asp-route-id="@x.TaskId">Edit</a>
+                        <a class="btn btn-outline-danger" asp-controller="Home" asp-action="Delete" asp-route-id="@x.TaskId">Delete</a>
+                    </div>
+                </div>
             }
         </div>
-        <div class="col-4 quadrant">
-            <h3>Quadrant 2</h3>
+        <div class="col-4 quadrant bg-light border rounded p-3">
             @foreach (var x in Model.Where(x => x.Quadrant == 2))
             {
-                <p>- @x.TaskName  </p>
-                <p> Due: @x.DueDate </p>
-                <p>
-                    <a class="btn btn-info" asp-controller="Home" asp-action="Edit" asp-route-id="@x.TaskId">Edit</a>
-                    <a class="btn btn-danger" asp-controller="Home" asp-action="Delete" asp-route-id="@x.TaskId">Delete</a>
-                </p>
-                <br />
+                <div class="card mb-3 shadow-sm">
+                    <div class="card-body">
+                        <h5 class="card-title">@x.TaskName</h5>
+                        <h6 class="card-subtitle mb-2 text-muted">Category: @x.Category?.CategoryName</h6>
+                        <h6 class="card-subtitle mb-2 text-muted">Due: @x.DueDate</h6>
+                        <a class="btn btn-outline-info" asp-controller="Home" asp-action="Edit" asp-route-id="@x.TaskId">Edit</a>
+                        <a class="btn btn-outline-danger" asp-controller="Home" asp-action="Delete" asp-route-id="@x.TaskId">Delete</a>
+                    </div>
+                </div>
             }
         </div>
     </div>
-    <div class="row col-12">
-        <div class="col-4"><h2>Not Important</h2></div>
-        <div class="col-4 quadrant">
-            <h3>Quadrant 3</h3>
+    <div class="row col-12 mb-4">
+        <div class="col-4 d-flex align-items-center justify-content-end">
+            <h2 class="bg-secondary text-white p-2 rounded">Not Important</h2>
+        </div>
+        <div class="col-4 quadrant bg-light border rounded p-3">
             @foreach (var x in Model.Where(x => x.Quadrant == 3))
             {
-                <p>- @x.TaskName  </p>
-                <p> Due: @x.DueDate </p>
-                <p>
-                    <a class="btn btn-info" asp-controller="Home" asp-action="Edit" asp-route-id="@x.TaskId">Edit</a>
-                    <a class="btn btn-danger" asp-controller="Home" asp-action="Delete" asp-route-id="@x.TaskId">Delete</a> 
-                </p>
-                <br />
+                <div class="card mb-3 shadow-sm">
+                    <div class="card-body">
+                        <h5 class="card-title">@x.TaskName</h5>
+                        <h6 class="card-subtitle mb-2 text-muted">Category: @x.Category?.CategoryName</h6>
+                        <h6 class="card-subtitle mb-2 text-muted">Due: @x.DueDate</h6>
+                        <a class="btn btn-outline-info" asp-controller="Home" asp-action="Edit" asp-route-id="@x.TaskId">Edit</a>
+                        <a class="btn btn-outline-danger" asp-controller="Home" asp-action="Delete" asp-route-id="@x.TaskId">Delete</a>
+                    </div>
+                </div>
             }
         </div>
-        <div class="col-4 quadrant">
-            <h3>Quadrant 4</h3>
+        <div class="col-4 quadrant bg-light border rounded p-3">
             @foreach (var x in Model.Where(x => x.Quadrant == 4))
             {
-                <p>- @x.TaskName  </p>
-                <p> Due: @x.DueDate </p>
-                <p>
-                    <a class="btn btn-info" asp-controller="Home" asp-action="Edit" asp-route-id="@x.TaskId">Edit</a>
-                    <a class="btn btn-danger" asp-controller="Home" asp-action="Delete" asp-route-id="@x.TaskId">Delete</a>
-                </p>
-                <br />
+                <div class="card mb-3 shadow-sm">
+                    <div class="card-body">
+                        <h5 class="card-title">@x.TaskName</h5>
+                        <h6 class="card-subtitle mb-2 text-muted">Category: @x.Category?.CategoryName</h6>
+                        <h6 class="card-subtitle mb-2 text-muted">Due: @x.DueDate</h6>
+                        <a class="btn btn-outline-info" asp-controller="Home" asp-action="Edit" asp-route-id="@x.TaskId">Edit</a>
+                        <a class="btn btn-outline-danger" asp-controller="Home" asp-action="Delete" asp-route-id="@x.TaskId">Delete</a>
+                    </div>
+                </div>
             }
         </div>
     </div>

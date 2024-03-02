@@ -1,12 +1,16 @@
-﻿@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
-@{
+﻿@{
 }
 @model AddTask
 
-<div class="container">
-    <div class="row col-12">
-        <div class="col-12"><h4>Thank you for adding @Model.TaskName to the task list.</h4></div>
+<div class="container mt-5">
+    <div class="card shadow p-3 mb-5 bg-white rounded">
+        <div class="card-body">
+            <div class="row col-12">
+                <div class="col-12 text-center">
+                    <h4 class="card-title">Thank you for adding <strong>@Model.TaskName</strong> to the task list.</h4>
+                </div>
+            </div>
+        </div>
     </div>
 </div>
+

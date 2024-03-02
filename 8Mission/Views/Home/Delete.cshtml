@@ -1,19 +1,23 @@
-﻿@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
-@{
+﻿@{
 }
 @model AddTask
 
-<div class="container">
-    <div class="row">
-        <div class="col-12"><h4>Please confirm that you want to delete @Model.TaskName from the task list.</h4></div>
-    </div>
-    <div class="row">
-        <form asp-controller="Home" asp-action="Delete" method="post">
-            <input type="hidden" asp-for="TaskId" />
-            <div class="col-3"><a class="btn btn-info" asp-controller="Home" asp-action="ViewTasks">Cancel</a></div>
-            <div class="col-9"><button type="submit" class="btn btn-danger">Delete</button></div>
-        </form> 
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-12 col-md-8">
+            <div class="card border-danger shadow">
+                <div class="card-header bg-danger text-white">
+                    <h5 class="card-title">Delete Confirmation</h5>
+                </div>
+                <div class="card-body">
+                    <h6 class="card-text">Please confirm that you want to delete <strong>@Model.TaskName</strong> from the task list.</h6>
+                    <form asp-controller="Home" asp-action="Delete" method="post" class="d-flex justify-content-between align-items-center mt-4">
+                        <input type="hidden" asp-for="TaskId" />
+                        <a class="btn btn-outline-info" asp-controller="Home" asp-action="ViewTasks">Cancel</a>
+                        <button type="submit" class="btn btn-danger">Delete</button>
+                    </form>
+                </div>
+            </div>
+        </div>
     </div>
 </div>
