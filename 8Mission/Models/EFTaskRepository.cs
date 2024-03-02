@@ -32,8 +32,6 @@ namespace _8Mission.Models
 
                 _context.SaveChanges();
             }
-   
-            
             
         }
         public void DeleteTask(AddTask task)
